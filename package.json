@@ -1,0 +1,45 @@
+{
+  "name": "ingreso",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "App de gestión de ingresos con Electron y React",
+  "main": "src/main/main.cjs",
+  "scripts": {
+    "vite": "vite",
+    "electron": "electron .",
+    "electron-wait": "wait-on http://localhost:5173 && electron .",
+    "dev": "concurrently --kill-others-on-fail false --raw \"npm run vite\" \"npm run electron-wait\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "html-to-image": "^1.11.13",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0",
+    "jsqr": "^1.4.0",
+    "mysql2": "^3.16.2",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.12.0",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.7",
+    "sqlite3": "^5.1.7",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.3"
+  }
+}

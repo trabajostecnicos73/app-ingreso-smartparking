@@ -1,0 +1,213 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #f1f5f9;
+    min-height: 80vh;
+}
+
+.tarjetaCierre {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
+}
+
+.header {
+    text-align: center;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.totalEfectivo {
+    background: #ecfdf5;
+    padding: 15px;
+    border-radius: 8px;
+    color: #065f46;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.filaDinero {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.resumenVehiculos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.vItem {
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.vItem p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 5px 0 0;
+}
+
+.btnCerrar {
+    width: 100%;
+    background: #1e293b;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btnCerrar:hover { background: #0f172a; }
+
+.containerCierre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: #f4f7f6;
+}
+
+.glassCard {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  border: 1px solid #eee;
+}
+
+.headerCierre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userIcon {
+  font-size: 40px;
+  color: #2c3e50;
+}
+
+.userBadge h3 { margin: 0; font-size: 1.1rem; color: #333; }
+.userBadge span { font-size: 0.8rem; color: #888; }
+
+.chipTurno {
+  background: #ebf2ff;
+  color: #2563eb;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.infoBox {
+  background: #2c3e50;
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.iconCircle {
+  background: rgba(255, 255, 255, 0.1);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.data label { font-size: 0.75rem; opacity: 0.8; letter-spacing: 1px; }
+.data h2 { margin: 5px 0; font-size: 2rem; font-weight: 700; }
+.data small { font-size: 0.8rem; opacity: 0.7; }
+
+.subGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.miniBox {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #f0f0f0;
+}
+
+.miniIcon { color: #2563eb; font-size: 18px; }
+.miniBox label { font-size: 0.7rem; color: #888; display: block; }
+.miniBox p { margin: 2px 0 0; font-weight: 600; color: #333; }
+
+.statsSection {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.statsSection h4 {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.statsGrid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.statItem { text-align: center; }
+.statVal { display: block; font-size: 1.5rem; font-weight: 700; color: #333; }
+.statLab { font-size: 0.7rem; color: #888; text-transform: uppercase; }
+
+.btnFinalizar {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btnFinalizar:hover { background: #1d4ed8; }
+
+/* Ocultar ticket en pantalla */
+@media screen { .thermalTicket { display: none; } }

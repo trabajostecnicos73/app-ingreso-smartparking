@@ -1,0 +1,172 @@
+.container { padding: 20px; }
+.titulo { color: #1e293b; margin-bottom: 20px; }
+
+.filtrosBox {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.grupoFiltro { display: flex; flex-direction: column; gap: 5px; }
+.grupoFiltro label { font-size: 0.8rem; font-weight: bold; color: #64748b; }
+.grupoFiltro input { padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+.btnBuscar {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tablaWrapper { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.tabla { width: 100%; border-collapse: collapse; }
+.tabla th { background: #f8fafc; padding: 15px; text-align: left; color: #64748b; font-size: 0.85rem; }
+.tabla td { padding: 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+
+.placaText { font-weight: 800; color: #1e293b; }
+.monto { font-weight: bold; color: #16a34a; }
+
+.metodoTag { font-size: 0.75rem; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
+
+.statusActivo { color: #2563eb; font-weight: bold; }
+.statusFin { color: #64748b; }
+
+.btnTicketAccion {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.overlayTicket {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modalContenedor {
+    background: white;
+    padding: 15px; /* Reducido para ahorrar espacio */
+    border-radius: 12px;
+    position: relative;
+    max-width: 350px; /* Reducido de 400px a 350px */
+    width: 85%;
+    max-height: 90vh; /* Asegura que no se salga de la pantalla */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Permite scroll interno si el ticket es muy largo */
+}
+
+.btnCerrarModal {
+    align-self: flex-end;
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btnCerrarModal:hover {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.modalContenedor :global(.ticketContainer) {
+    transform: scale(0.9); /* Escala el ticket al 90% para que se vea más pequeño */
+    transform-origin: top center;
+    margin-bottom: -20px; /* Compensa el espacio del escalado */
+}
+
+.ayudaModal {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* --- ESTILOS PARA PAGINACIÓN --- */
+
+.loadMoreContainer {
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+    background: #f8fafc; /* Fondo ligero para diferenciar del cuerpo de la tabla */
+    border-top: 1px solid #f1f5f9;
+}
+
+.btnLoadMore {
+    background: white;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+    padding: 10px 30px;
+    border-radius: 99px; /* Botón tipo píldora */
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnLoadMore:hover {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+}
+
+.btnLoadMore:active {
+    transform: translateY(0);
+}
+
+.btnLoadMore:disabled {
+    border-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    background: #f1f5f9;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animación opcional para el texto de carga */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.btnLoadMore:disabled {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Ajuste para que el contenedor de la tabla no corte el botón */
+.tablaWrapper {
+    display: flex;
+    flex-direction: column;
+}
