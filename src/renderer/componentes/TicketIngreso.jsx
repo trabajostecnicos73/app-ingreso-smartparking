@@ -4,7 +4,7 @@ import { toPng } from "html-to-image";
 import styles from "../estilos/ingreso.module.css";
 import { MdWhatsapp, MdPrint, MdPhoneIphone, MdQrCodeScanner } from "react-icons/md";
 
-const ipcRenderer = window.require ? window.require('electron').ipcRenderer : null;
+const ipcRenderer = window.electronAPI || null;
 
 export default function TicketIngreso({ datos }) {
   const [telefono, setTelefono] = useState("");
@@ -19,18 +19,18 @@ export default function TicketIngreso({ datos }) {
   }, []);
 
   const gestionarEnvioWhatsApp = async () => {
-    if (!telefono || telefono.length < 10) {
+    if (!telefono || telefono.length !== 10) {
       setErrorWhatsApp("Número inválido");
       return;
     }
     try {
-      const dataUrl = await toPng(ticketRef.current, { backgroundColor: "#fff", pixelRatio: 2 });
-      if (ipcRenderer) {
-        ipcRenderer.send('copiar-imagen-portapapeles', dataUrl);
-        const mensaje = `*SmartParking*%0AComprobante de Ingreso: *${placa}*%0A_Pega la imagen del ticket aquí._`;
-        window.open(`https://wa.me/57${telefono}?text=${mensaje}`, "_blank");
-      }
-    } catch (err) { setErrorWhatsApp("Error imagen"); }
+  const dataUrl = await toPng(ticketRef.current, { backgroundColor: "#fff", pixelRatio: 2 });
+  if (ipcRenderer) {
+    ipcRenderer.copiarImagenPortapapeles(dataUrl);
+    const mensaje = `*SmartParking*%0AComprobante de Ingreso: *${placa}*%0A_Pega la imagen del ticket aquí._`;
+    ipcRenderer.abrirWhatsapp(`https://wa.me/57${telefono}?text=${mensaje}`);
+  }
+} catch (err) { setErrorWhatsApp("Error imagen"); }
   };
 
   return (

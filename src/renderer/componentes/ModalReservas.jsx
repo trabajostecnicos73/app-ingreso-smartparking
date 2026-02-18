@@ -13,6 +13,7 @@ export default function ModalReservas({ alCerrar }) {
   const [reservas, setReservas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [confirmandoId, setConfirmandoId] = useState(null);
 
   // Función para consultar las reservas activas
   const consultarReservas = async () => {
@@ -31,26 +32,20 @@ export default function ModalReservas({ alCerrar }) {
     }
   };
 
-  // Función para liberar (cancelar) una reserva
   const liberarReserva = async (id, placa) => {
-    const confirmar = window.confirm(`¿Estás seguro de liberar la reserva de la placa ${placa}?`);
-    
-    if (confirmar) {
-      try {
-        const res = await fetch(`http://127.0.0.1:3002/api/reservas/${id}`, {
-          method: 'DELETE'
-        });
-        
-        if (res.ok) {
-          // Refrescar la lista tras eliminar con éxito
-          consultarReservas();
-        } else {
-          alert("Error al intentar liberar la reserva en el servidor.");
-        }
-      } catch (err) {
-        console.error("Error al liberar:", err);
-        alert("Hubo un fallo en la conexión al intentar liberar.");
+    try {
+      const res = await fetch(`http://127.0.0.1:3002/api/reservas/liberar/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setConfirmandoId(null);
+        consultarReservas();
+      } else {
+        alert("Error al intentar liberar la reserva en el servidor.");
       }
+    } catch (err) {
+      console.error("Error al liberar:", err);
+      alert("Hubo un fallo en la conexión al intentar liberar.");
     }
   };
 
@@ -128,20 +123,34 @@ export default function ModalReservas({ alCerrar }) {
               {reservas.map(r => (
                 <tr key={r.id_reserva}>
                   <td><div className={styles.placaEstilo}>{r.placa}</div></td>
-                  <td>{r.categoria}</td>
-                  <td>{new Date(r.fecha_reserva).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+                  <td>{r.tipo_vehiculo}</td>
+                  <td>{new Date(r.fecha_registro).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
                   <td style={{ textAlign: 'center' }}>
-                    <button 
-                      onClick={() => liberarReserva(r.id_reserva, r.placa)}
-                      style={{ 
-                        backgroundColor: '#ef4444', color: 'white', border: 'none', 
-                        borderRadius: '6px', padding: '6px', cursor: 'pointer',
-                        display: 'inline-flex', alignItems: 'center'
-                      }}
-                      title="Liberar espacio y cancelar reserva"
-                    >
-                      <MdDeleteForever size={20} />
-                    </button>
+                    {confirmandoId === r.id_reserva ? (
+                      <div style={{ display: 'inline-flex', gap: '4px', alignItems: 'center' }}>
+                        <span style={{ fontSize: '12px', color: '#64748b' }}>¿Seguro?</span>
+                        <button onClick={() => liberarReserva(r.id_reserva, r.placa)}
+                          style={{ backgroundColor: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', padding: '4px 8px', cursor: 'pointer', fontSize: '12px' }}>
+                          Sí
+                        </button>
+                        <button onClick={() => setConfirmandoId(null)}
+                          style={{ backgroundColor: '#94a3b8', color: 'white', border: 'none', borderRadius: '6px', padding: '4px 8px', cursor: 'pointer', fontSize: '12px' }}>
+                          No
+                        </button>
+                      </div>
+                    ) : (
+                      <button 
+                        onClick={() => setConfirmandoId(r.id_reserva)}
+                        style={{ 
+                          backgroundColor: '#ef4444', color: 'white', border: 'none', 
+                          borderRadius: '6px', padding: '6px', cursor: 'pointer',
+                          display: 'inline-flex', alignItems: 'center'
+                        }}
+                        title="Liberar espacio y cancelar reserva"
+                      >
+                        <MdDeleteForever size={20} />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

@@ -11,7 +11,7 @@ import {
 } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 
-const ipcRenderer = window.require ? window.require('electron').ipcRenderer : null;
+const ipcRenderer = window.electronAPI || null;
 
 export default function FacturaSalida({ datos, onFinalizar }) {
   const facturaRef = useRef(null);
@@ -35,11 +35,11 @@ export default function FacturaSalida({ datos, onFinalizar }) {
       });
       
       if (ipcRenderer) {
-        ipcRenderer.send('copiar-imagen-portapapeles', dataUrl);
-        const mensaje = `*SmartParking*%0AComprobante de pago placa: *${datos.placa}*%0A_Copia y pega la imagen adjunta._`;
-        const url = `https://wa.me/57${telefonoManual}?text=${mensaje}`;
-        ipcRenderer.send('abrir-whatsapp', url);
-      }
+      ipcRenderer.copiarImagenPortapapeles(dataUrl);
+      const mensaje = `*SmartParking*%0AComprobante de pago placa: *${datos.placa}*%0A_Copia y pega la imagen adjunta._`;
+      const url = `https://wa.me/57${telefonoManual}?text=${mensaje}`;
+      ipcRenderer.abrirWhatsapp(url);
+    }
     } catch (error) {
       console.error("Error al generar imagen:", error);
     }

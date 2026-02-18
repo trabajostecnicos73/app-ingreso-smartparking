@@ -31,25 +31,22 @@ export default function IngresoParqueadero({ turno_id }) {
 
   // 1. Cargar categorías sincronizadas (SQLite)
   useEffect(() => {
-    const cargarCategorias = async () => {
-      try {
-        const response = await fetch(
-          "http://127.0.0.1:3002/api/dashboard/stats",
-        );
-        const data = await response.json();
-        if (data.ocupacion) {
-          const listaCats = Object.keys(data.ocupacion).map((nombre) => ({
-            id: nombre,
-            nombre: nombre.charAt(0).toUpperCase() + nombre.slice(1),
-          }));
-          setCategorias(listaCats);
-        }
-      } catch (error) {
-        console.error("Error cargando categorías:", error);
+  const cargarCategorias = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:3002/api/categorias");
+      const data = await response.json();
+      
+      if (data && data.length > 0) {
+        setCategorias(data);
+        // FORZAMOS que el estado inicial sea el ID de la primera categoría recibida
+        setTipoVehiculo(data[0].id.toString()); 
       }
-    };
-    cargarCategorias();
-  }, []);
+    } catch (error) {
+      console.error("Error cargando categorías:", error);
+    }
+  };
+  cargarCategorias();
+}, []);
 
   // --- 2. LÓGICA DE BÚSQUEDA Y AUTO-COMPLETADO TOTAL ---
 useEffect(() => {

@@ -1,45 +1,61 @@
 {
   "name": "ingreso",
-  "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "App de gestión de ingresos con Electron y React",
-  "main": "src/main/main.cjs",
+  "main": "main.js",
   "scripts": {
-    "vite": "vite",
-    "electron": "electron .",
-    "electron-wait": "wait-on http://localhost:5173 && electron .",
-    "dev": "concurrently --kill-others-on-fail false --raw \"npm run vite\" \"npm run electron-wait\"",
+    "dev": "vite",
+    "dev:electron": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "npm run dev"
+    "dist": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.13.2",
-    "bcrypt": "^6.0.0",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "express": "^5.2.1",
+    "express": "^4.21.2",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
-    "jspdf": "^4.0.0",
+    "jspdf": "^2.5.2",
     "jsqr": "^1.4.0",
     "mysql2": "^3.16.2",
     "qrcode.react": "^4.2.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.12.0",
+    "react-router-dom": "^7.1.3",
+    "better-sqlite3": "^11.8.1",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.2",
-    "concurrently": "^9.2.1",
-    "electron": "^39.2.7",
-    "sqlite3": "^5.1.7",
-    "vite": "^7.3.1",
-    "wait-on": "^9.0.3"
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.0.7",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.smartparking.ingreso",
+    "productName": "SmartParking Ingreso",
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*",
+      "preload.cjs"
+    ],
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.cjs",
+      "main/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }

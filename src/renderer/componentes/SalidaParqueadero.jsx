@@ -66,7 +66,7 @@ export default function SalidaParqueadero({ turno_id }) {
     setCargando(true);
     try {
       // Petición al servidor de portería (Puerto 3002)
-      const resp = await fetch(`http://127.0.0.1:3002/api/salida/${placaURL}`);
+      const resp = await fetch(`http://127.0.0.1:3002/api/vehiculo/${placaURL}`);
       
       const contentType = resp.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
@@ -94,7 +94,7 @@ export default function SalidaParqueadero({ turno_id }) {
     }
 
     try {
-      const resp = await fetch("http://127.0.0.1:3002/api/salida/pagar", {
+      const resp = await fetch("http://127.0.0.1:3002/api/procesar-pago", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
